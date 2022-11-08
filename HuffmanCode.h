@@ -18,22 +18,25 @@ using Position_t = BiTreeNode*;
 struct BiTreeNode {
     ElemType   data;
     Position_t parent, left, right;
+
+    bool operator()(const Position_t& x, const Position_t& y) const {
+        return x->data.weight > y->data.weight;
+    }
 };
 
 class HuffmanTree {
-    using CmpFunc_t    = std::function<bool(const Position_t& x, const Position_t& y)>;
-    using CodeMap_t    = std::map<char, String>;
-    using CharPosMap_t = std::map<char, Position_t>;
+    using CodeMap_t           = std::map<uint8_t, String>;
+    using CharPosMap_t        = std::map<uint8_t, Position_t>;
+    const uint8_t PARENT_CHAR = -1;
 
-    CmpFunc_t cmpFunc = [](const Position_t& x, const Position_t& y) -> bool {
-        return x->data.weight > y->data.weight;
-    };
-    using CandidateQueue_t = std::priority_queue<Position_t, std::vector<Position_t>, decltype(cmpFunc)>;
+    using CandidateQueue_t = std::priority_queue<Position_t, std::vector<Position_t>, BiTreeNode>;
 
     Position_t       head;
     CodeMap_t        codeMap;
     CharPosMap_t     chPosMap;
     CandidateQueue_t candidateQueue;
+
+    void combine(Position_t parent, Position_t left, Position_t right);
 
 public:
     HuffmanTree();
