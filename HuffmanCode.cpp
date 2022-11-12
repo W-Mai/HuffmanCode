@@ -29,4 +29,28 @@ void HuffmanTree::push(ElemType& data) {
 }
 
 void HuffmanTree::build() {
+    Position_t parent;
+    Position_t left, right;
+
+    auto pop = [](CandidateQueue_t& queue) {
+        auto top = queue.top();
+        queue.pop();
+        return top;
+    };
+
+    auto push = [this](Position_t data) {
+        this->candidateQueue.push(data);
+    };
+
+    while (!candidateQueue.empty()) {
+        if (candidateQueue.size() == 1) {
+            head = pop(candidateQueue);
+            break;
+        }
+        left   = pop(candidateQueue);
+        right  = pop(candidateQueue);
+        parent = new BiTreeNode;
+        combine(parent, left, right);
+        push(parent);
+    }
 }
