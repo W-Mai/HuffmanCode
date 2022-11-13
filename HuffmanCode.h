@@ -36,7 +36,8 @@ class HuffmanTree {
     CharPosMap_t     chPosMap;
     CandidateQueue_t candidateQueue;
 
-    void combine(Position_t parent, Position_t left, Position_t right);
+    void   combine(Position_t parent, Position_t left, Position_t right);
+    String preCode(Position_t pos);
 
 public:
     HuffmanTree();

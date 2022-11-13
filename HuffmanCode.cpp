@@ -53,4 +53,20 @@ void HuffmanTree::build() {
         combine(parent, left, right);
         push(parent);
     }
+
+    for (auto& x : chPosMap) {
+        codeMap[x.first] = preCode(x.second); // 建立字符到前缀码的哈希映射
+    }
+}
+
+String HuffmanTree::preCode(Position_t pos) {
+    std::string code;
+    Position_t  currentPos = pos;
+    while (currentPos->parent) {
+        if (currentPos->parent->left == currentPos) {
+            code += '0';
+        } else code += '1';
+        currentPos = currentPos->parent;
+    }
+    return { code.rbegin(), code.rend() };
 }
