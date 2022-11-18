@@ -15,6 +15,10 @@ int main() {
 
     huffmanTree->build();
 
+    for (int i = 0; i < 10; ++i) {
+        std::cout << huffmanTree->preCode(i) << std::endl;
+    }
+
     delete huffmanTree;
     return 0;
 }

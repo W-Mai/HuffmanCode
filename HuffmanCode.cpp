@@ -70,3 +70,7 @@ String HuffmanTree::preCode(Position_t pos) {
     }
     return { code.rbegin(), code.rend() };
 }
+
+String HuffmanTree::preCode(uint8_t code) {
+    return codeMap[code];
+}
