@@ -4,6 +4,13 @@ HuffmanTree::HuffmanTree()
     : head(nullptr) {
 }
 
+HuffmanTree::~HuffmanTree() {
+    std::for_each(chPosMap.begin(), chPosMap.end(), [](auto pos) {
+        delete pos.second;
+    });
+    chPosMap.clear();
+}
+
 void HuffmanTree::combine(Position_t parent, Position_t left, Position_t right) {
     parent->parent = nullptr;
     parent->data   = {
@@ -29,6 +36,8 @@ void HuffmanTree::push(ElemType& data) {
 }
 
 void HuffmanTree::build() {
+    if (candidateQueue.empty()) return;
+
     Position_t parent;
     Position_t left, right;
 
@@ -60,8 +69,8 @@ void HuffmanTree::build() {
 }
 
 String HuffmanTree::preCode(Position_t pos) {
-    std::string code;
-    Position_t  currentPos = pos;
+    String     code;
+    Position_t currentPos = pos;
     while (currentPos->parent) {
         if (currentPos->parent->left == currentPos) {
             code += '0';

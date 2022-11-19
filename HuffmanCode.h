@@ -41,6 +41,7 @@ class HuffmanTree {
 
 public:
     HuffmanTree();
+    ~HuffmanTree();
 
     void push(ElemType& data);
     void build();
