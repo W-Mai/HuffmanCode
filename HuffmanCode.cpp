@@ -80,6 +80,18 @@ String HuffmanTree::preCode(Position_t pos) {
     return { code.rbegin(), code.rend() };
 }
 
-String HuffmanTree::preCode(uint8_t code) {
+inline String HuffmanTree::preCode(uint8_t code) {
     return codeMap[code];
+}
+
+double HuffmanTree::wpl() {
+    double   sum       = 0.0;
+    uint32_t weightSum = 0;
+
+    std::for_each(chPosMap.begin(), chPosMap.end(), [&weightSum, &sum, this](const auto& pos) {
+        sum += (int)preCode(pos.first).length() * pos.second->data.weight;
+        weightSum += pos.second->data.weight;
+    });
+
+    return sum / weightSum;
 }

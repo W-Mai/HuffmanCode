@@ -46,5 +46,6 @@ public:
     void push(ElemType& data);
     void build();
 
+    double wpl();
     String preCode(uint8_t code);
 };
