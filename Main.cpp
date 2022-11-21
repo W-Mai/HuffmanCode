@@ -19,6 +19,8 @@ int main() {
         std::cout << huffmanTree->preCode(i) << std::endl;
     }
 
+    std::cout << huffmanTree->wpl() << std::endl;
+
     delete huffmanTree;
     return 0;
 }
