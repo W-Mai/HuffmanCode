@@ -1,25 +1,30 @@
 ﻿#include "HuffmanCode.h"
-#include <iostream>
+#include <cstdio>
 
 HuffmanTree* huffmanTree;
 
 int main() {
     huffmanTree = new HuffmanTree;
 
-    for (int i = 0; i < 10; ++i) {
-        huffmanTree->push(*new ElemType {
-            .ch     = (uint8_t)i,
-            .weight = static_cast<uint32_t>(i),
-        });
+    ElemType freq_table[] = {
+        {'a',  10},
+        { 'b', 1 },
+        { 'c', 20},
+        { 'd', 15},
+        { 'e', 3 }
+    };
+
+    for (auto& freq : freq_table) {
+        huffmanTree->push(freq);
     }
 
     huffmanTree->build();
 
-    for (int i = 0; i < 10; ++i) {
-        std::cout << huffmanTree->preCode(i) << std::endl;
+    for (auto& freq : freq_table) {
+        printf("Raw: %c\tPrefixCode: %s\n", freq.ch, huffmanTree->preCode(freq.ch).c_str());
     }
 
-    std::cout << huffmanTree->wpl() << std::endl;
+    printf("WPL: %f", huffmanTree->wpl());
 
     delete huffmanTree;
     return 0;
